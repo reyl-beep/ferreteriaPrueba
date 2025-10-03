@@ -103,7 +103,7 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
 
 app.UseCors("AllowSpecificOrigins");
 
-app.UseRateLimiting();
+app.UseClientRateLimiting();
 
 app.UseSwagger();
 app.UseSwaggerUI();
