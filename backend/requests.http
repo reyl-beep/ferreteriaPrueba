@@ -1,0 +1,23 @@
+### Login
+POST http://localhost:5259/api/seguridad/login
+Content-Type: application/json
+
+{
+  "email": "admin@ferre.com",
+  "password": "Admin123!"
+}
+
+### Catálogo madera
+GET http://localhost:5259/api/catalogos/madera
+
+### Inventario existencias
+GET http://localhost:5259/api/inventario/existencias
+
+### Crear venta
+POST http://localhost:5259/api/ventas/
+Content-Type: application/json
+
+{
+  "clienteId": 1,
+  "total": 1500.50
+}

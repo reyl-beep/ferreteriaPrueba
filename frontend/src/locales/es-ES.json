@@ -1,0 +1,23 @@
+{
+  "app": {
+    "title": "Ferretería POS",
+    "offline": "Trabajando sin conexión"
+  },
+  "navigation": {
+    "dashboard": "Panel",
+    "catalog": "Catálogo",
+    "pricing": "Gestión de precios",
+    "inventory": "Inventario",
+    "sales": "Ventas y cotizaciones",
+    "delivery": "Servicio a domicilio",
+    "employees": "Empleados",
+    "reports": "Reportes",
+    "security": "Seguridad",
+    "marketing": "Marketing"
+  },
+  "states": {
+    "loading": "Cargando...",
+    "empty": "Sin datos para mostrar",
+    "error": "Ocurrió un error"
+  }
+}
