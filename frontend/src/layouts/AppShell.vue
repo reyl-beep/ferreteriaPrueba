@@ -52,7 +52,7 @@ const filteredNavItems = computed(() =>
   navItems.filter((item) => !item.roles || item.roles.some((role) => store.hasRole(role)))
 );
 
-const title = computed(() => route.meta?.title ?? 'Ferretería POS');
+const title = computed(() => (route.meta?.title as string | undefined) ?? 'Ferretería POS');
 const isLoading = computed(() => store.isLoading);
 
 const toggleDrawer = () => {
