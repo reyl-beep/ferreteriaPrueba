@@ -70,6 +70,7 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.Configure<ClientRateLimitOptions>(builder.Configuration.GetSection("RateLimiting"));
 builder.Services.Configure<ClientRateLimitPolicies>(builder.Configuration.GetSection("RateLimitingPolicies"));
+builder.Services.AddMemoryCache();
 builder.Services.AddInMemoryRateLimiting();
 builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
 
