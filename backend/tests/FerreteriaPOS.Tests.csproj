@@ -10,6 +10,6 @@
     <PackageReference Include="coverlet.collector" Version="6.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="../FerreteriaPOS.Api.csproj" />
+    <Compile Include="../Models/Resultado.cs" Link="Models/Resultado.cs" />
   </ItemGroup>
 </Project>
