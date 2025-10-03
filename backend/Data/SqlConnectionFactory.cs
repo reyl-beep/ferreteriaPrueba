@@ -4,10 +4,15 @@ using System.Data;
 
 namespace FerreteriaPOS.Data;
 
-public sealed class SqlConnectionFactory(IConfiguration configuration) : ISqlConnectionFactory
+public sealed class SqlConnectionFactory : ISqlConnectionFactory
 {
-    private readonly string _connectionString = configuration.GetConnectionString("Default") ??
-        throw new InvalidOperationException("Connection string 'Default' not found.");
+    private readonly string _connectionString;
+
+    public SqlConnectionFactory(IConfiguration configuration)
+    {
+        _connectionString = configuration.GetConnectionString("Default") ??
+            throw new InvalidOperationException("Connection string 'Default' not found.");
+    }
 
     public async Task<IDbConnection> CreateConnectionAsync(CancellationToken cancellationToken = default)
     {
