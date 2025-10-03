@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
-import piniaPersist from '@pinia/plugin-persistedstate';
+import piniaPersistedstate from 'pinia-plugin-persistedstate';
 import { createHead } from '@vueuse/head';
 import App from './App.vue';
 import router from './router';
@@ -12,7 +12,7 @@ import { configureApiClient } from './services/httpClient';
 const app = createApp(App);
 
 const pinia = createPinia();
-pinia.use(piniaPersist);
+pinia.use(piniaPersistedstate);
 
 const i18n = createI18n({
   legacy: false,
