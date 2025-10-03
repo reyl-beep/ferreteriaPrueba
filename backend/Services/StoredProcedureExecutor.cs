@@ -12,11 +12,18 @@ public interface IStoredProcedureExecutor
     Task<IEnumerable<T>> QueryAsync<T>(string procedureName, DynamicParameters parameters, CancellationToken cancellationToken = default);
 }
 
-public sealed class StoredProcedureExecutor(ISqlConnectionFactory connectionFactory) : IStoredProcedureExecutor
+public sealed class StoredProcedureExecutor : IStoredProcedureExecutor
 {
+    private readonly ISqlConnectionFactory _connectionFactory;
+
+    public StoredProcedureExecutor(ISqlConnectionFactory connectionFactory)
+    {
+        _connectionFactory = connectionFactory;
+    }
+
     public async Task<Resultado> ExecuteAsync(string procedureName, DynamicParameters parameters, CancellationToken cancellationToken = default)
     {
-        await using var connection = await connectionFactory.CreateConnectionAsync(cancellationToken);
+        using var connection = await _connectionFactory.CreateConnectionAsync(cancellationToken);
         parameters.Add("@pResultado", dbType: DbType.Boolean, direction: ParameterDirection.Output);
         parameters.Add("@pMsg", dbType: DbType.String, size: 500, direction: ParameterDirection.Output);
         await connection.ExecuteAsync(new CommandDefinition(procedureName, parameters, commandType: CommandType.StoredProcedure, cancellationToken: cancellationToken));
@@ -31,7 +38,7 @@ public sealed class StoredProcedureExecutor(ISqlConnectionFactory connectionFact
 
     public async Task<IEnumerable<T>> QueryAsync<T>(string procedureName, DynamicParameters parameters, CancellationToken cancellationToken = default)
     {
-        await using var connection = await connectionFactory.CreateConnectionAsync(cancellationToken);
+        using var connection = await _connectionFactory.CreateConnectionAsync(cancellationToken);
         parameters.Add("@pResultado", dbType: DbType.Boolean, direction: ParameterDirection.Output);
         parameters.Add("@pMsg", dbType: DbType.String, size: 500, direction: ParameterDirection.Output);
         var data = await connection.QueryAsync<T>(new CommandDefinition(procedureName, parameters, commandType: CommandType.StoredProcedure, cancellationToken: cancellationToken));
